@@ -4,7 +4,7 @@ library(jsonlite)
 library(lubridate)
 library(tidyverse)
 #api requests
-access_token = POST("https://www.strava.com/oauth/token?client_id=71719&client_secret=dc399f53809f34effabb9b103ee998ccbee97447&refresh_token=814c4a8b2b7c96b7986219a53216ddd297b20db7&grant_type=refresh_token")
+access_token = POST("https://www.strava.com/oauth/token?client_id= &client_secret= &refresh_token= &grant_type=refresh_token")
 at = fromJSON(rawToChar(access_token$content))
 acc_token <- at$access_token
 res = GET(sprintf("https://www.strava.com/api/v3/athlete/activities?access_token=%s" ,acc_token))
@@ -39,9 +39,3 @@ month_vector %>% ggplot(aes(x=date,y=distance)) + geom_bar(stat = "identity",pos
 month_avg <- my_dataset %>% select(date,distance) %>% group_by(month =month.abb[as.numeric(substr(my_dataset$date,6,7))]) %>% summarise(distance=mean(distance))
 #plot last six months avg distance graph
 month_avg %>% ggplot(aes(x=month,y=distance)) + geom_bar(stat = "identity",position = "stack") + theme(axis.text.x = element_text(angle = 90))
-#plot trendline -->  have I started cycling faster, on average, over the past few months?
-
-
-
-
-
